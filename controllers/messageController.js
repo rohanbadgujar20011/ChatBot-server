@@ -25,7 +25,7 @@ module.exports.getmesssage = async (req, res, next) => {
     // Sort the combined array based on 'updatedAt' field
     allMessages.sort((a, b) => a.updatedAt - b.updatedAt);
 
-    // Transform the combined messages into the desired format
+   
     const formattedMessages = allMessages.map((msg) => ({
       fromself: msg.sender.toString() === from,
       message: msg.message.text,

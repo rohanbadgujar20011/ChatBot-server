@@ -15,6 +15,7 @@ app.use("/api/auth", userrouter);
 app.use("/api/messages/", messagerouter);
 const server = app.listen(process.env.PORT, () => {
   console.log(`Server started on ${process.env.PORT}`);
+  console.log(`This is client:${process.env.CLIENT}`);
 });
 const io = socket(server, {
   cors: {

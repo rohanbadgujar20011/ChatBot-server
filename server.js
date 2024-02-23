@@ -18,18 +18,21 @@ const server = app.listen(process.env.PORT, () => {
 });
 const io = socket(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: `${process.env.CLIENT}`,
     credentials: true,
   },
 });
 global.onlineUsers = new Map();
 io.on("connection", (socket) => {
+  console.log("Its connection");
   global.chatSocket = socket;
   socket.on("add-user", (userId) => {
+    console.log("connection for add user");
     onlineUsers.set(userId, socket.id);
   });
 
   socket.on("send-msg", (data) => {
+    console.log("sending data");
     const sendUserSocket = onlineUsers.get(data.to);
     if (sendUserSocket) {
       socket.to(sendUserSocket).emit("msg-recieve", data.msg);
